@@ -14,7 +14,7 @@ function Header() {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       setInputValue("");
-      setCityName(cityName);
+      setCityName(inputValue);
     }
   };
   return (
