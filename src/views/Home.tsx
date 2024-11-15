@@ -9,7 +9,7 @@ import {
   GetWeekWidget,
 } from "@/components";
 import { Weather, ForecastTideDay, ForecastDay } from "@/types";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { cityNameAtom } from "@/stores";
 
 const defaultWeatherData: Weather = {
@@ -110,11 +110,10 @@ function HomePage() {
   const fetchApi = async () => {
     const API_KEY = "56442fada1144d12abf64743241411";
     const BASE_URL = "https://api.weatherapi.com/v1";
-
     try {
       /** Promise 인스턴스 방법을 사용했을 땐, resolve에 해당 */
       const res = await axios.get(
-        `${BASE_URL}/forecast.json?q=seoul&days=7&key=${API_KEY}`
+        `${BASE_URL}/forecast.json?q=${cityName}&days=7&key=${API_KEY}`
       );
 
       if (res.status === 200) {
@@ -135,7 +134,7 @@ function HomePage() {
 
     try {
       const res = await axios.get(
-        `${BASE_URL}/marine.json?q=seoul&days=1&key=${API_KEY}`
+        `${BASE_URL}/marine.json?q=${cityName}&days=1&key=${API_KEY}`
       );
 
       if (res.status === 200 && res.data) {
@@ -152,7 +151,7 @@ function HomePage() {
 
     try {
       const res = await axios.get(
-        `${BASE_URL}/forecast.json?q=seoul&days=7&key=${API_KEY}`
+        `${BASE_URL}/forecast.json?q=${cityName}&days=7&key=${API_KEY}`
       );
       console.log(res);
 
@@ -179,7 +178,7 @@ function HomePage() {
     fetchApi();
     fetchTideApi();
     getOneWeekWeather();
-  }, []);
+  }, [cityName]);
 
   return (
     <div className="page">
